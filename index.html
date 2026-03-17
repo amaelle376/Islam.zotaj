@@ -171,7 +171,7 @@
 <section class="contact-strip reveal">
   <div class="contact-headline">Have a project<br>in <em>mind?</em></div>
   <div class="contact-actions">
-    <a class="contact-email" id="emailLink" href="#"><span class="__cf_email__" data-cfemail="52283d2633387c3637213b353c12353f333b3e7c313d3f">[email&#160;protected]</span></a>
+    <a class="contact-email" id="emailLink" href="#">zotaj.design@gmail.com</a>
     <div class="contact-socials">
       <a href="https://www.behance.net" target="_blank">Behance</a>
       <a href="https://www.instagram.com/zotaj.design" target="_blank">Instagram</a>
@@ -185,7 +185,7 @@
   <a class="footer-back" href="#top">Back to top ↑</a>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // Email — split to defeat Cloudflare obfuscation
 (function(){
   var e = "zotaj.design" + String.fromCharCode(64) + "gmail.com";
@@ -304,4 +304,12 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e.isIntersecting) { e.target.classList.add('revealed'); obs.unobserve(e.target); }
       });
     }, { threshold: 0.08 });
-    document.querySelecto
+    document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el) { el.classList.add('revealed'); });
+  }
+});
+</script>
+
+</body>
+</html>

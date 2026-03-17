@@ -6,8 +6,8 @@
   --black: #0E0E0D;
   --mid:   #6B6B67;
   --rule:  #E0E0DC;
-  --serif: 'Cormorant Garamond', serif;
-  --sans:  'Syne', sans-serif;
+  --serif: 'Barlow Condensed', sans-serif;
+  --sans:  'DM Sans', sans-serif;
 }
 
 html { font-size: 16px; scroll-behavior: smooth; }
@@ -225,10 +225,10 @@ nav.scrolled { padding: 20px 52px; }
 
 .slide-title {
   font-family: var(--serif);
-  font-size: clamp(56px, 7vw, 104px);
-  font-weight: 300;
+  font-size: clamp(52px, 6.5vw, 92px);
+  font-weight: 500;
   line-height: 1.0;
-  letter-spacing: -.02em;
+  letter-spacing: .04em;
   color: #fff;
   margin-bottom: 20px;
 }
@@ -385,8 +385,10 @@ nav.scrolled { padding: 20px 52px; }
 }
 .strip-title {
   font-family: var(--serif);
-  font-size: 22px;
-  font-weight: 400;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
   margin-bottom: 10px;
 }
 .strip-arrow {
@@ -428,7 +430,7 @@ nav.scrolled { padding: 20px 52px; }
 .about-headline {
   font-family: var(--serif);
   font-size: clamp(32px, 3.5vw, 52px);
-  font-weight: 300;
+  font-weight: 500;
   line-height: 1.1;
   margin-bottom: 28px;
 }
@@ -492,7 +494,7 @@ nav.scrolled { padding: 20px 52px; }
 .contact-headline {
   font-family: var(--serif);
   font-size: clamp(36px, 4vw, 60px);
-  font-weight: 300;
+  font-weight: 500;
   line-height: 1.08;
 }
 .contact-headline em { font-style: italic; color: var(--mid); }
@@ -546,7 +548,7 @@ footer {
 .page-hero-title {
   font-family: var(--serif);
   font-size: clamp(48px, 6vw, 88px);
-  font-weight: 300;
+  font-weight: 500;
   line-height: 1.02;
   letter-spacing: -.02em;
 }
@@ -574,7 +576,7 @@ footer {
 .cs-title {
   font-family: var(--serif);
   font-size: clamp(56px, 7vw, 100px);
-  font-weight: 300;
+  font-weight: 500;
   line-height: 1.0;
   letter-spacing: -.02em;
   margin-bottom: 40px;
@@ -612,7 +614,7 @@ footer {
 .cs-intro-headline {
   font-family: var(--serif);
   font-size: clamp(28px, 3vw, 44px);
-  font-weight: 300;
+  font-weight: 500;
   line-height: 1.12;
 }
 .cs-intro-headline em { font-style: italic; color: var(--mid); }
@@ -863,7 +865,7 @@ footer {
 .cv-name {
   font-family: var(--serif);
   font-size: clamp(52px, 6vw, 80px);
-  font-weight: 300;
+  font-weight: 500;
   line-height: 1.02;
   letter-spacing: -.02em;
   margin-bottom: 8px;
@@ -925,7 +927,7 @@ footer {
 .contact-big-email {
   font-family: var(--serif);
   font-size: clamp(24px, 2.8vw, 40px);
-  font-weight: 300;
+  font-weight: 500;
   color: var(--mid);
   transition: color .2s;
   display: block;
@@ -1020,7 +1022,7 @@ footer {
   padding: 20px 0;
   font-family: var(--serif);
   font-size: 32px;
-  font-weight: 300;
+  font-weight: 500;
   color: var(--black);
   cursor: pointer;
   transition: color .2s;

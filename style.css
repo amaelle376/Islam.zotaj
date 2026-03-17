@@ -33,10 +33,10 @@ nav {
   justify-content: space-between;
   padding: 28px 52px;
   background: var(--white);
-  border-bottom: 1px solid transparent;
-  transition: border-color .3s, padding .3s;
+  border-bottom: 1px solid var(--rule);
+  transition: padding .3s;
 }
-nav.scrolled { border-color: var(--rule); padding: 20px 52px; }
+nav.scrolled { padding: 20px 52px; }
 
 .nav-name {
   font-family: var(--sans);
@@ -673,32 +673,43 @@ footer {
 }
 
 .cs-nav {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32px 52px;
   border-top: 1px solid var(--rule);
+  gap: 24px;
 }
 .cs-nav-item {
-  padding: 40px 52px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  transition: background .2s;
-  cursor: pointer;
-}
-.cs-nav-item:hover { background: #F5F5F2; }
-.cs-nav-item:first-child { border-right: 1px solid var(--rule); }
-.cs-nav-label {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: .14em;
+  letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--mid);
+  transition: color .2s;
 }
+.cs-nav-item:hover { color: var(--black); }
+.cs-nav-label { display: none; }
 .cs-nav-title {
-  font-family: var(--serif);
-  font-size: 28px;
-  font-weight: 400;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: var(--sans);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--mid);
+  transition: color .2s;
 }
+.cs-nav-item:hover .cs-nav-title { color: var(--black); }
+.cs-nav-home {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--mid);
+  transition: color .2s;
+  white-space: nowrap;
+}
+.cs-nav-home:hover { color: var(--black); }
 
 /* ─── ABOUT PAGE ─────────────────────────────────── */
 .about-page-content {
@@ -1074,13 +1085,7 @@ footer {
   .cs-text-section { grid-template-columns: 1fr; padding: 48px 24px; }
   .cs-meta-row { flex-wrap: wrap; gap: 24px; }
 
-  /* Project prev/next nav — move to bottom, stack vertically */
-  .cs-nav {
-    grid-template-columns: 1fr;
-    border-top: 1px solid var(--rule);
-  }
-  .cs-nav-item { padding: 24px; border-right: none !important; border-bottom: 1px solid var(--rule); }
-  .cs-nav-item:last-child { border-bottom: none; }
+  .cs-nav { padding: 24px; flex-wrap: wrap; gap: 16px; }
 
   .about-page-content { grid-template-columns: 1fr; }
   .about-sidebar { border-right: none; border-bottom: 1px solid var(--rule); padding: 48px 24px; }

@@ -11,13 +11,12 @@
 </head>
 <body>
 
-<!-- NAV -->
 <nav id="nav">
   <a class="nav-name" href="/">Islam Zotaj</a>
   <div class="nav-right">
     <ul class="nav-links">
       <li class="nav-dropdown" id="workDropdown">
-        <a  id="workToggle">Work</a>
+        <a id="workToggle">Work</a>
         <div class="dropdown-menu" id="dropdownMenu">
           <ul>
             <li><a href="/work-omnia">Omnia <span>Brand Identity</span></a></li>
@@ -28,18 +27,16 @@
           </ul>
         </div>
       </li>
-      <li><a href="/about" >About</a></li>
-      <li><a href="/cv" >CV</a></li>
-      <li><a href="/contact" >Contact</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/cv">CV</a></li>
+      <li><a href="/contact">Contact</a></li>
     </ul>
   </div>
-  <!-- Burger -->
   <button class="burger" id="burger" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
 
-<!-- Mobile Menu -->
 <div class="mobile-menu" id="mobileMenu">
   <ul class="mobile-menu-links">
     <li>
@@ -123,7 +120,6 @@
 
   <div class="slider-controls">
     <div class="slider-dots" id="dots"></div>
-    
   </div>
   <div class="slide-progress" id="progress"></div>
 </section>
@@ -175,7 +171,7 @@
 <section class="contact-strip reveal">
   <div class="contact-headline">Have a project<br>in <em>mind?</em></div>
   <div class="contact-actions">
-    <a class="contact-email" href="/cdn-cgi/l/email-protection#7802170c1912561c1d0b111f16381f15191114561b1715"><span class="__cf_email__" data-cfemail="3f45504b5e55115b5a4c5658517f58525e5653115c5052">[email&#160;protected]</span></a>
+    <a class="contact-email" id="emailLink" href="#">zotaj.design@gmail.com</a>
     <div class="contact-socials">
       <a href="https://www.behance.net" target="_blank">Behance</a>
       <a href="https://www.instagram.com/zotaj.design" target="_blank">Instagram</a>
@@ -189,16 +185,27 @@
   <a class="footer-back" href="#top">Back to top ↑</a>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  const slides = document.querySelectorAll('.slide');
-  const dotsEl = document.getElementById('dots');
-  const progress = document.getElementById('progress');
-  let current = 0, timer;
+<script>
+// Email — split to defeat Cloudflare obfuscation
+(function(){
+  var e = "zotaj.design" + String.fromCharCode(64) + "gmail.com";
+  var links = document.querySelectorAll('#emailLink');
+  links.forEach(function(l){ l.href = "mailto:" + e; l.textContent = e; });
+})();
+</script>
 
-  slides.forEach((_, i) => {
-    const d = document.createElement('div');
+<script>
+// Slider
+(function(){
+  var slides = document.querySelectorAll('.slide');
+  var dotsEl  = document.getElementById('dots');
+  var progress = document.getElementById('progress');
+  var current = 0, timer;
+
+  slides.forEach(function(_, i) {
+    var d = document.createElement('div');
     d.className = 'dot' + (i === 0 ? ' active' : '');
-    d.addEventListener('click', () => goTo(i));
+    d.addEventListener('click', function(){ goTo(i); });
     dotsEl.appendChild(d);
   });
 
@@ -215,19 +222,94 @@
     clearTimeout(timer);
     progress.classList.remove('animating');
     progress.style.width = '0%';
-    requestAnimationFrame(() => requestAnimationFrame(() => {
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){
       progress.classList.add('animating');
       progress.style.width = '100%';
-    }));
-    timer = setTimeout(() => goTo(current + 1), 5000);
+    }); });
+    timer = setTimeout(function(){ goTo(current + 1); }, 5000);
   }
 
-  // Keyboard still works for accessibility
-  document.addEventListener('keydown', e => {
+  document.addEventListener('keydown', function(e) {
     if (e.key === 'ArrowRight') goTo(current + 1);
     if (e.key === 'ArrowLeft')  goTo(current - 1);
   });
 
-  let tx = 0;
-  const sl = document.getElementById('slider');
-  sl.addEventListener('touchstart', e => { tx = e.touches
+  var tx = 0;
+  var sl = document.getElementById('slider');
+  sl.addEventListener('touchstart', function(e){ tx = e.touches[0].clientX; }, { passive: true });
+  sl.addEventListener('touchend', function(e){
+    var dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 50) goTo(dx < 0 ? current + 1 : current - 1);
+  });
+
+  resetProgress();
+})();
+</script>
+
+<script>
+// Nav, burger, dropdown, scroll reveal
+document.addEventListener('DOMContentLoaded', function() {
+  var nav = document.getElementById('nav');
+  if (nav) {
+    window.addEventListener('scroll', function() {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+  }
+
+  var workDropdown = document.getElementById('workDropdown');
+  var workToggle   = document.getElementById('workToggle');
+  if (workDropdown && workToggle) {
+    workToggle.addEventListener('mouseenter', function() { workDropdown.classList.add('open'); });
+    workDropdown.addEventListener('mouseleave', function() { workDropdown.classList.remove('open'); });
+    workToggle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      workDropdown.classList.toggle('open');
+    });
+    document.addEventListener('click', function(e) {
+      if (!workDropdown.contains(e.target)) workDropdown.classList.remove('open');
+    });
+  }
+
+  var burger     = document.getElementById('burger');
+  var mobileMenu = document.getElementById('mobileMenu');
+  if (burger && mobileMenu) {
+    burger.addEventListener('click', function() {
+      burger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    });
+    mobileMenu.querySelectorAll('a').forEach(function(l) {
+      l.addEventListener('click', function() {
+        burger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+
+  var mobileWorkToggle = document.getElementById('mobileWorkToggle');
+  var mobileSubLinks   = document.getElementById('mobileSubLinks');
+  if (mobileWorkToggle && mobileSubLinks) {
+    mobileWorkToggle.addEventListener('click', function() {
+      mobileSubLinks.classList.toggle('open');
+    });
+  }
+
+  var rs = document.createElement('style');
+  rs.textContent = '.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}.reveal.revealed{opacity:1!important;transform:none!important}';
+  document.head.appendChild(rs);
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { e.target.classList.add('revealed'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el) { el.classList.add('revealed'); });
+  }
+});
+</script>
+
+</body>
+</html>

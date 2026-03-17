@@ -7,30 +7,60 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
 
 <nav id="nav">
-  <a class="nav-name" href="index.html">Islam Zotaj</a>
+  <a class="nav-name" href="/">Islam Zotaj</a>
   <div class="nav-right">
     <ul class="nav-links">
-      <li class="nav-dropdown">
-        <a style="color:var(--black)">Work</a>
-        <ul class="dropdown-menu">
-          <li><a href="work-omnia.html">Omnia <span>Brand Identity</span></a></li>
-          <li><a href="work-batch.html">Batch <span>Editorial</span></a></li>
-          <li><a href="work-serene.html">Serene Pathways <span>Website</span></a></li>
-          <li><a href="work-bloom.html">Bloom <span>Brand Identity</span></a></li>
-          <li><a href="work-mother.html">Mother Puppers <span>Packaging</span></a></li>
-        </ul>
+      <li class="nav-dropdown" id="workDropdown">
+        <a style="color:var(--black)" id="workToggle">Work</a>
+        <div class="dropdown-menu" id="dropdownMenu">
+          <ul>
+            <li><a href="/work-omnia">Omnia <span>Brand Identity</span></a></li>
+            <li><a href="/work-batch">Batch <span>Editorial</span></a></li>
+            <li><a href="/work-serene">Serene Pathways <span>Website</span></a></li>
+            <li><a href="/work-bloom">Bloom <span>Brand Identity</span></a></li>
+            <li><a href="/work-mother">Mother Puppers <span>Packaging</span></a></li>
+          </ul>
+        </div>
       </li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="cv.html">CV</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="/about" >About</a></li>
+      <li><a href="/cv" >CV</a></li>
+      <li><a href="/contact" >Contact</a></li>
     </ul>
   </div>
+  <!-- Burger -->
+  <button class="burger" id="burger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <ul class="mobile-menu-links">
+    <li>
+      <span id="mobileWorkToggle">Work</span>
+      <ul class="mobile-sub-links" id="mobileSubLinks">
+        <li><a href="/work-omnia">Omnia</a></li>
+        <li><a href="/work-batch">Batch</a></li>
+        <li><a href="/work-serene">Serene Pathways</a></li>
+        <li><a href="/work-bloom">Bloom</a></li>
+        <li><a href="/work-mother">Mother Puppers</a></li>
+      </ul>
+    </li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/cv">CV</a></li>
+    <li><a href="/contact">Contact</a></li>
+  </ul>
+  <div class="mobile-menu-footer">
+    <a href="https://www.behance.net" target="_blank">Behance</a>
+    <a href="https://www.instagram.com/zotaj.design" target="_blank">Instagram</a>
+    <a href="https://www.linkedin.com" target="_blank">LinkedIn</a>
+  </div>
+</div>
 
 <!-- PROJECT HEADER -->
 <div class="cs-header anim anim-d1">
@@ -113,11 +143,11 @@
 
 <!-- PREV / NEXT -->
 <nav class="cs-nav">
-  <a class="cs-nav-item" href="work-mother.html">
+  <a class="cs-nav-item" href="/work-mother">
     <span class="cs-nav-label">← Previous</span>
     <span class="cs-nav-title">Mother Puppers</span>
   </a>
-  <a class="cs-nav-item" href="work-batch.html" style="text-align:right;">
+  <a class="cs-nav-item" href="/work-batch" style="text-align:right;">
     <span class="cs-nav-label">Next →</span>
     <span class="cs-nav-title">Batch</span>
   </a>
@@ -128,6 +158,72 @@
   <a class="footer-back" href="#top">Back to top ↑</a>
 </footer>
 
-<script src="nav.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Sticky nav on scroll
+  const nav = document.getElementById('nav');
+  if (nav) {
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+  }
+
+  // Desktop dropdown — click toggle, close on outside click
+  const workToggle = document.getElementById('workToggle');
+  const workDropdown = document.getElementById('workDropdown');
+  if (workToggle && workDropdown) {
+    workToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      workDropdown.classList.toggle('open');
+    });
+    document.addEventListener('click', (e) => {
+      if (!workDropdown.contains(e.target)) {
+        workDropdown.classList.remove('open');
+      }
+    });
+    // Keep open when hovering the menu itself
+    workDropdown.addEventListener('mouseleave', () => {
+      workDropdown.classList.remove('open');
+    });
+    workToggle.addEventListener('mouseenter', () => {
+      workDropdown.classList.add('open');
+    });
+  }
+
+  // Mobile burger
+  const burger = document.getElementById('burger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  if (burger && mobileMenu) {
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    });
+  }
+
+  // Mobile work submenu
+  const mobileWorkToggle = document.getElementById('mobileWorkToggle');
+  const mobileSubLinks = document.getElementById('mobileSubLinks');
+  if (mobileWorkToggle && mobileSubLinks) {
+    mobileWorkToggle.addEventListener('click', () => {
+      mobileSubLinks.classList.toggle('open');
+    });
+  }
+
+  // Scroll reveal
+  const style = document.createElement('style');
+  style.textContent = '.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}.reveal.revealed{opacity:1!important;transform:none!important}';
+  document.head.appendChild(style);
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('revealed'), i * 80);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+});
+</script>
 </body>
 </html>
